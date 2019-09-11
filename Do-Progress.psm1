@@ -1,7 +1,4 @@
-function Do-Progress([int]$count,[int]$total, [bool]$inverse, [int]$started) {
-    if($inverse -eq $true) {
-        $count = $total - $count
-    }
+function Do-Progress([int]$count,[int]$total, [int]$started) {
     [int]$percentComplete = 100 / $total * $count
     $displayPercent = $percentComplete
     [int]$percentComplete = $percentComplete / 2

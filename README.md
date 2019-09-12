@@ -5,7 +5,7 @@ Do-Progress is a visual loading bar for Windows Powershell
 
 1. Clone this repository
 
-2. Import the Module
+2. Import the Module or paste the Do-Progress function into your code
 ```powershell
 Import-Module Do-Progress
 ```

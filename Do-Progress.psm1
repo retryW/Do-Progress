@@ -92,7 +92,7 @@ function Do-Progress([int]$count,[int]$total, [int]$started) {
     # Return carriage. Allows us to overwrite the current line within the console.
     Write-Host "`r"
 
-    # Draw the loading bar
+    # Draw the loading bar. Unsure if it would be more efficient to check if Post vars are empty and exclude if so. Will have to test.
     Write-Host "[" -NoNewline -BackgroundColor Black
     Write-Host $completeBarPre -BackgroundColor Green -ForegroundColor Green -NoNewline
     Write-Host $completeString -BackgroundColor Green -ForegroundColor Black -NoNewline

@@ -1,6 +1,8 @@
 # Do-Progress
 Do-Progress is a visual loading bar for Windows Powershell
 
+![Sneak Preview](ProgressBar.gif)
+
 **Usage**
 
 1. Clone this repository
@@ -33,5 +35,3 @@ while ($count -ne $total) {
     Do-Progress $count $total $started
 }
 ```
-
-![Sneak Preview](ProgressBar.gif)

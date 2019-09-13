@@ -1,7 +1,13 @@
 function Do-Progress([int]$count,[int]$total, [int]$started) {
+    # Calculate percentage
     [int]$percentComplete = 100 / $total * $count
+    # Keep the actual percentage for displaying number on screen
     $displayPercent = $percentComplete
+    # Make 100% equal to 50, as it will fit a default PowerShell window. 100 characters would be excessive.
     [int]$percentComplete = $percentComplete / 2
+
+    # Empty variables from previous run
+    # Used to create 'chunks' to display in console with the least number of Write-Hosts. Significantly increases performance.
     $completeBarPre = ""
     $completeBarPost = ""
     $completeString = ""
@@ -12,6 +18,7 @@ function Do-Progress([int]$count,[int]$total, [int]$started) {
     $incompleteBarPost = ""
     $incompleteString = ""
 
+    # Calculate what character should be used in each position
     for($i = 0; $i -le $percentComplete; $i++) {
         if ($i -eq 24) {
             $completeString += $displayPercent.ToString()[0]
@@ -81,9 +88,12 @@ function Do-Progress([int]$count,[int]$total, [int]$started) {
             }
         }
     }
-    Write-Host "`r"
-    Write-Host "[" -NoNewline -BackgroundColor Black
 
+    # Return carriage. Allows us to overwrite the current line within the console.
+    Write-Host "`r"
+
+    # Draw the loading bar
+    Write-Host "[" -NoNewline -BackgroundColor Black
     Write-Host $completeBarPre -BackgroundColor Green -ForegroundColor Green -NoNewline
     Write-Host $completeString -BackgroundColor Green -ForegroundColor Black -NoNewline
     Write-Host $completeBarPost -BackgroundColor Green -ForegroundColor Green -NoNewline
@@ -93,17 +103,21 @@ function Do-Progress([int]$count,[int]$total, [int]$started) {
     Write-Host $incompleteBarPre -BackgroundColor Red -ForegroundColor Red -NoNewline
     Write-Host $incompleteString -BackgroundColor Red -ForegroundColor White -NoNewline
     Write-Host $incompleteBarPost -BackgroundColor Red -ForegroundColor Red -NoNewline
-
     Write-Host "]" -NoNewline -BackgroundColor Black
+
+    # Append the stats to the end of the loading bar
     if ($started) {
-        Write-Host " Started: $started, Completed: $count, Total: $total" -NoNewline #"`r"
+        Write-Host " Completed: $count, Started: $started, Total: $total" -NoNewline #"`r"
     } else {
         Write-Host " Completed: $count, Total: $total" -NoNewline #"`r"
     }
     if($count -eq $total){
-    Write-Host ""
-    Write-Host ""
+        # Go to new line, so external script doesn't write over the bar or on same line
+        # Write another line so there's an empty line after the loading bar. Looks far cleaner.
+        Write-Host ""
+        Write-Host ""
     }
 }
 
+# Export the function
 Export-ModuleMember -Function *

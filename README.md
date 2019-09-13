@@ -34,4 +34,4 @@ while ($count -ne $total) {
 }
 ```
 
-![Visual](https://imgur.com/puaU2wi)
+![Sneak Preview](ProgressBar.gif)

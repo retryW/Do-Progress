@@ -33,3 +33,5 @@ while ($count -ne $total) {
     Do-Progress $count $total $started
 }
 ```
+
+![Visual](https://imgur.com/puaU2wi)

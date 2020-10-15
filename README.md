@@ -35,3 +35,13 @@ while ($count -ne $total) {
     Do-Progress $count $total $started
 }
 ```
+
+**NoClutter Mode**
+
+The -NoClutter mode can be used to have a loading bar with no stats.
+This mode has been made 100x more efficient, and will significantly speed up large jobs.
+
+```powershell
+Do-Progress $completed $total -NoClutter
+```
+![Sneak Preview](bar_benchmark_noclutter.gif)
